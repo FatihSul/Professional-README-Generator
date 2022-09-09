@@ -1,10 +1,11 @@
-// TODO: Include packages needed for this application
+// packages required to run the program
 const inquirer = require('inquirer');
-const fs =- require('fs');
+const fs = require('fs');
 const generateMarkdown = require("./utils/generateMarkdown");
+const path = require("path");
 
-// TODO: Create an array of questions for user "input"
-const questions = inquirer.prompt([
+// list of questions for the readme
+const questions = [
     {   type: "input",
         message: "What is your GitHub username?", 
         name: "gitUser"
@@ -22,21 +23,23 @@ const questions = inquirer.prompt([
         name: "description"
     },
     {   type: "input",
-        message: "Any common questions?", 
+        message: "Where can you be contacted for questions?", 
         name: "questions"
     },
     {   type: "list",
         message: "What kind of License should your project have?", 
-        choices: ["Apache", "CC", "GPLv3", "GPLv2", "ISC", "MIT", "WTFPL", "None"],
+        choices: ["Apache", "CC", "GPLv3", "ISC", "MIT", "None"],
         name: "license"
     },
     {   type: "input",
         message: "How is your program installed?", 
-        name: "installation"
+        name: "installation",
+        default: "npm i"
     },
     {   type: "input",
         message: "How is your project used?", 
-        name: "usage"
+        name: "usage",
+        default: "node index.js"
     },
     {   type: "input",
         message: "What command should be run to install dependencies?", 
@@ -44,32 +47,34 @@ const questions = inquirer.prompt([
         default: "npm i inquirer@8.2.4"
     },
     {   type: "input",
-        message: "What command should be run to run tests?", 
-        name: "runTests"
+        message: "What command should be used to run tests?", 
+        name: "runTests",
+        default: "npm test"
     },
     {   type: "input",
         message: "What does the user need to know about using the repo?",  
         name: "moreInfo"
     },
     {   type: "input",
-        message: "What does the user need to know about contributing to the repo?", 
+        message: "Where can they contact you to contribute (email or phone#)", 
         name: "contribution"
     }  
-])
+];
 
 
-console.log(questions)
-// TODO: Create a function to write README file
+// console.log(questions)
 function writeToFile(fileName, data, err) {
-    return fs.writeFileSync(path.join(process.cwd(), fileName), data, err);
+    return fs.writeFile(path.join(process.cwd(), fileName), data, err)
 }
 
 
-// TODO: Create a function to initialize app
+// starts up the questions to be shown then calls them to be written into the readme
 function init() {
     inquirer.prompt(questions)
     .then((response) => {
-        writeToFile("README.md", generateMarkdown({...response}));
+        writeToFile("README.md", generateMarkdown({...response}), (err) => {
+            (err) ? console.log(err) : console.log("")
+        });
     });
 }
 

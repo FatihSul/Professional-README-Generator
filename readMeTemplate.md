@@ -1,33 +1,39 @@
 # ${data.projectName}
 
+${renderLicenseSection(data.license)}
+${renderLicenseBadge(data.license)}
+
 ## Description
 
 ${data.description}
 
 ## Table of Contents
 
+- [License](#license)
 - [Installation](#installation)
 - [Usage](#usage)
 - [More Info](#more-info)
 - [How to Contribute](#how-to-contribute)
+- [Tests](#tests)
+- [Questions](#questions)
 - [Contact Info](#contact-info)
 
 
-## License
-
-${data.license}
-
 ## Installation
 
+To install the programs you'll need you've got to run these commands.
 ~~~
 ${data.installation}
+
+${data.dependencies}
 ~~~
-${dependencies}
 
 ## Usage
 
+To run the program you've got to use the command:
+~~~
 ${data.usage}
-
+~~~
 ---
 
 ## More Info
@@ -36,18 +42,22 @@ ${data.moreInfo}
 
 ## How to Contribute
 
-${data.contribution}
+To help contribute to this project, contact me over at ${data.contribution}!
 
 ## Tests
 
-${runTests}
+To run tests
+~~~
+${data.runTests}
+~~~
 
 ## Questions
 
-${data.questions}
+If you have any questions contact me at ${data.questions}
 
 ## Contact Info
 
-- ${data.gitUser}
+- You can find more of my work over here ${data.gitUser}
 
-- ${data.email}
+- For anything else contact me at ${data.email}
+
